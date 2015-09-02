@@ -1,0 +1,11 @@
+Package: pedRSP
+Type: Package
+Title: Calculates the Relatedness Summary Parameters (RSPs) in Pedigrees
+Version: 0.1
+Date: 2015-09-01
+Author: Jesse D. Raffa
+Maintainer: Jesse D. Raffa <jraffa@uw.edu>
+Description: Calculates the relatedness summary parameters in addition to exact and and approximate power/confidence intervals for additive polygenic models in pedigrees.
+License: GPL-3
+LazyData: TRUE
+Imports: kinship2
