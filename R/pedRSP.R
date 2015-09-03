@@ -21,7 +21,7 @@
 #' test1 <- data.frame(id  =c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14),
 #' mom =c(0, 0, 0, 0, 2, 2, 4, 4, 6,  2,  0,  0, 12, 13),
 #' dad =c(0, 0, 0, 0, 1, 1, 3, 3, 3,  7,  0,  0, 11, 10),
-#' sex =c(0, 1, 0, 1, 0, 1, 0, 1, 0,  0,  0,  1,  1,  1))
+#' sex =c(1, 2, 1, 2, 1, 2, 1, 2, 1, 1, 1, 2, 2, 2))
 #' tped <- with(test1, pedigree(id, dad, mom, sex))
 #' computeRSPs(ped=tped)
 
@@ -59,11 +59,14 @@ computeRSPs <- function(ped=NULL,kmat=NULL,thresholderror=0.01,forcePD=TRUE) {
 
 #' @export
 print.pedRSP = function(x, digits=3,...) {
-  message(paste("Relatedness Summary Parameters for object"))
-  message(paste("N=",x$N))
-  message(paste("V_lambda=",round(x$Vlambda,digits=digits)))
-  message(paste("V_q=",round(x$Vq,digits=digits)))
-  message(paste("gamma=",round(x$gammapar,digits=digits)))
+  message(paste("Relatedness Summary Parameters"))
+  message(paste0("N=",x$N))
+  message(paste0("V_lambda=",round(x$Vlambda,digits=digits)))
+  message(paste0("V_q=",round(x$Vq,digits=digits)))
+  message(paste0("gamma=",round(x$gammapar,digits=digits)))
+  Vqs <- mean(log(c(1.5,0.5))^2) - mean(log(c(1.5,0.5)))^2
+  Nr <- ceiling(( (x$N-1)*x$Vq/Vqs + 1)/2)
+  message(paste0("Effective number of sibpairs: ",Nr, " (pairs) or ", Nr*2, " individuals"))
 }
 
 
@@ -88,7 +91,7 @@ print.pedRSP = function(x, digits=3,...) {
 #' test1 <- data.frame(id  =c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14),
 #' mom =c(0, 0, 0, 0, 2, 2, 4, 4, 6,  2,  0,  0, 12, 13),
 #' dad =c(0, 0, 0, 0, 1, 1, 3, 3, 3,  7,  0,  0, 11, 10),
-#' sex =c(0, 1, 0, 1, 0, 1, 0, 1, 0,  0,  0,  1,  1,  1))
+#' sex =c(1, 2, 1, 2, 1, 2, 1, 2, 1, 1, 1, 2, 2, 2))
 #' tped <- with(test1, pedigree(id, dad, mom, sex))
 #' x <- computeRSPs(ped=tped)
 #' ex.elrt <- computeEXELRT(pedRSP=x,truehsq=0.3,null=seq(0.1,0.8,0.1))
@@ -149,7 +152,7 @@ computeEXELRT <- function(pedRSP,truehsq,null,sig.level=0.05) {
 #' test1 <- data.frame(id  =c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14),
 #' mom =c(0, 0, 0, 0, 2, 2, 4, 4, 6,  2,  0,  0, 12, 13),
 #' dad =c(0, 0, 0, 0, 1, 1, 3, 3, 3,  7,  0,  0, 11, 10),
-#' sex =c(0, 1, 0, 1, 0, 1, 0, 1, 0,  0,  0,  1,  1,  1))
+#' sex =c(1, 2, 1, 2, 1, 2, 1, 2, 1, 1, 1, 2, 2, 2))
 #' tped <- with(test1, pedigree(id, dad, mom, sex))
 #' x <- computeRSPs(ped=tped)
 #' elrta <- computeAELRTA(pedRSP=x,truehsq=0.3,null=seq(0.1,0.8,0.1))
@@ -196,7 +199,7 @@ computeAELRTA <- function(pedRSP,truehsq,null,sig.level=0.05) {
 #' test1 <- data.frame(id  =c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14),
 #' mom =c(0, 0, 0, 0, 2, 2, 4, 4, 6,  2,  0,  0, 12, 13),
 #' dad =c(0, 0, 0, 0, 1, 1, 3, 3, 3,  7,  0,  0, 11, 10),
-#' sex =c(0, 1, 0, 1, 0, 1, 0, 1, 0,  0,  0,  1,  1,  1))
+#' sex =c(1, 2, 1, 2, 1, 2, 1, 2, 1, 1, 1, 2, 2, 2))
 #' tped <- with(test1, pedigree(id, dad, mom, sex))
 #' x <- computeRSPs(ped=tped)
 #' elrtb <- computeAELRTB(pedRSP=x,truehsq=0.3,null=seq(0.1,0.8,0.1))
@@ -245,7 +248,7 @@ computeAELRTB <- function(pedRSP,truehsq,null,sig.level=0.05) {
 #' test1 <- data.frame(id  =c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14),
 #' mom =c(0, 0, 0, 0, 2, 2, 4, 4, 6,  2,  0,  0, 12, 13),
 #' dad =c(0, 0, 0, 0, 1, 1, 3, 3, 3,  7,  0,  0, 11, 10),
-#' sex =c(0, 1, 0, 1, 0, 1, 0, 1, 0,  0,  0,  1,  1,  1))
+#' sex =c(1, 2, 1, 2, 1, 2, 1, 2, 1, 1, 1, 2, 2, 2))
 #' tped <- with(test1, pedigree(id, dad, mom, sex))
 #' x <- computeRSPs(ped=tped)
 #' elrtc <- computeAELRTC(pedRSP=x,truehsq=0.3,null=seq(0.1,0.8,0.1))
@@ -293,7 +296,7 @@ computeAELRTC <- function(pedRSP,truehsq,null,sig.level=0.05) {
 #' test1 <- data.frame(id  =c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14),
 #' mom =c(0, 0, 0, 0, 2, 2, 4, 4, 6,  2,  0,  0, 12, 13),
 #' dad =c(0, 0, 0, 0, 1, 1, 3, 3, 3,  7,  0,  0, 11, 10),
-#' sex =c(0, 1, 0, 1, 0, 1, 0, 1, 0,  0,  0,  1,  1,  1))
+#' sex =c(1, 2, 1, 2, 1, 2, 1, 2, 1, 1, 1, 2, 2, 2))
 #' tped <- with(test1, pedigree(id, dad, mom, sex))
 #' x <- computeRSPs(ped=tped)
 #' elrtess <- computeAELRTESS(pedRSP=x,truehsq=0.3,null=seq(0.1,0.8,0.1))
@@ -326,6 +329,27 @@ computeAELRTESS <- function(pedRSP,truehsq,null,sig.level=0.05) {
 }
 
 
+#' Function for plotting a pedELRT object
+#'
+#' This function plots two graphs side-by-side of the ELRT and the power of the tests specified in the computeELRT functions
+#' @param x a pedELRT object
+#' @param inc.exact a logical of whether to include the exact ELRT in the plot (default=FALSE)
+#' @param legend a logical of whether to include a legend in the plot (default=FALSE)
+#' @param ... Additional arguments.
+#' @seealso \code{\link[pedRSP]{computeAELRTA}} \code{\link[pedRSP]{computeAELRTB}} \code{\link[pedRSP]{computeAELRTC}} \code{\link[pedRSP]{computeAELRTESS}} \code{\link[pedRSP]{computeEXELRT}}
+#' @author Jesse D. Raffa
+#' @details
+#' Plotting function for pedELRT object.  It plots the approximate or exact ELRT from what is calculated in the computeELRTX and computeEXLERT functions.
+#' @examples
+#' require(kinship2)
+#' test1 <- data.frame(id  =c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14),
+#' mom =c(0, 0, 0, 0, 2, 2, 4, 4, 6,  2,  0,  0, 12, 13),
+#' dad =c(0, 0, 0, 0, 1, 1, 3, 3, 3,  7,  0,  0, 11, 10),
+#' sex =c(1, 2, 1, 2, 1, 2, 1, 2, 1, 1, 1, 2, 2, 2))
+#' tped <- with(test1, pedigree(id, dad, mom, sex))
+#' x <- computeRSPs(ped=tped)
+#' elrtess <- computeAELRTESS(pedRSP=x,truehsq=0.3,null=seq(0.1,0.8,0.1))
+#' plot(elrtess,inc.exact=TRUE,legend=TRUE)
 #' @export
 plot.pedELRT = function(x,inc.exact=FALSE,legend=FALSE,...) {
   par(mfcol=c(1,2))
