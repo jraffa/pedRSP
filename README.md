@@ -18,3 +18,9 @@ install.packages("devtools");
 library(devtools);
 install_github("jraffa/pedRSP");
 ```
+
+# To Get Started
+
+```{r}
+?computeRSPs
+```
