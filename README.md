@@ -8,6 +8,7 @@ University of Washington, Department of Statistics, Technical Report no. 630 (38
     Jesse Raffa and Elizabeth Thompson 
     October 2014
 ```
+
 [PDF]: http://www.stat.washington.edu/research/reports/2014/tr630.pdf
 
 # To Install
