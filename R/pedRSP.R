@@ -28,9 +28,9 @@
 computeRSPs <- function(ped=NULL,kmat=NULL,thresholderror=0.01,forcePD=TRUE) {
   if(is.null(ped) & is.null(kmat))
     stop("Must pass pedigree or kinship matrix")
-  if(!is.null(ped) & class(ped)!="pedigree")
+  if(!is.null(ped) & (class(ped)!="pedigree" & class(ped)!="pedigreeList"))
     stop("ped argument not a pedigree")
-  if(!is.null(kmat) & (class(kmat)!="matrix" & class(kmat)!="Matrix"))
+  if(!is.null(kmat) & (class(kmat)!="matrix" & class(kmat)!="Matrix" & class(kmat)!="dsCMatrix"))
     stop('kmat argument not a matrix')
   if(!is.null(ped) & !is.null(kmat))
     stop("please specify either ped or kmat argument, not both")
