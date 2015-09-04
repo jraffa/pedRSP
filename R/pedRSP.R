@@ -15,6 +15,7 @@
 #' @export
 #' @importFrom kinship2 pedigree
 #' @importFrom kinship2 kinship
+#' @importFrom Matrix diag
 #' @examples
 #' require(kinship2)
 #' # Example from kinship2 package
