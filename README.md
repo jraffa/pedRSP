@@ -17,6 +17,7 @@ University of Washington, Department of Statistics, Technical Report no. 630 (38
 install.packages("devtools");
 library(devtools);
 install_github("jraffa/pedRSP");
+library(pedRSP);
 ```
 
 # To Get Started
