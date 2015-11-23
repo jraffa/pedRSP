@@ -11,6 +11,8 @@ University of Washington, Department of Statistics, Technical Report no. 630 (38
 
 [PDF:](http://www.stat.washington.edu/research/reports/2014/tr630.pdf) [(http://www.stat.washington.edu/research/reports/2014/tr630.pdf)](http://www.stat.washington.edu/research/reports/2014/tr630.pdf)
 
+The development of this software was supported in part by R37-GM046255.
+
 # To Install
 
 ```{r}
