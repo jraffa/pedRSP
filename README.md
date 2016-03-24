@@ -1,6 +1,14 @@
 # pedRSP
 Pedigree Relatedness Summary Parameters (pedRSP) R package.
-For more details, see the tech report:
+
+This package is for a paper accepted in Statistics in Biosciences:
+
+```{ref}
+Raffa J.D. and Thompson E.A. (2016) Power and Effective Study Size in Heritability Studies.  Statistics in Biosciences.
+```
+[Available Here:](http://link.springer.com/article/10.1007/s12561-016-9143-2)(http://link.springer.com/article/10.1007/s12561-016-9143-2)
+
+An earlier version is available as a Tech Report:
 
 ```{ref}
 University of Washington, Department of Statistics, Technical Report no. 630 (389 KB)
